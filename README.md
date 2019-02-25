@@ -145,8 +145,8 @@ Binary format is suggested for database storage and hex format for comparisson.
 ```php
 use function \Choval\Whois\parse_range;
 
-print\_r( parse\_range( '186.19.128/18') );
-/\*
+print_r( parse_range( '186.19.128/18') );
+/*
 Returns an array
      [range] => 186.19.128/18
       [from] => 186.19.128.0
@@ -155,10 +155,10 @@ Returns an array
     [bin_to] => (BINARY)
   [hex_from] => ba138000
     [hex_to] => ba13bfff
-\*/
+*/
 
-print\_r( parse\_range( '2a03:2880::/29') );
-/\*
+print_r( parse_range( '2a03:2880::/29') );
+/*
 Returns an array
      [range] => 2a03:2880::/29
       [from] => 2a03:2880:0000:0000:0000:0000:0000:0000
@@ -167,10 +167,10 @@ Returns an array
     [bin_to] => (BINARY)
   [hex_from] => 2a032880000000000000000000000000
     [hex_to] => 2a032887ffffffffffffffffffffffff
-\*/
+*/
 
-print\_r( parse\_range( '196.11.31.0 - 196.11.31.255') );
-/\*
+print_r( parse_range( '196.11.31.0 - 196.11.31.255') );
+/*
 Returns an array
      [range] => 196.11.31.0 - 196.11.31.255
       [from] => 196.11.31.0
@@ -179,20 +179,20 @@ Returns an array
     [bin_to] => (BINARY)
   [hex_from] => c40b1f00
     [hex_to] => c40b1fff
-\*/
+*/
 ```
 
 ### ip\_in\_range
 
-Checks if an IP ins in a range. The range is calculated using `parse\_range`.
+Checks if an IP ins in a range. The range is calculated using `parse_range`.
 
 ```php
 use function \Choval\Whois\ip_in_range;
 
-var\_dump( ip\_in\_range( '186.19.128.0', '186.19.128/18') );
+var_dump( ip_in_range( '186.19.128.0', '186.19.128/18') );
 // Returns true
 
-var\_dump( ip\_in\_range( '186.19.192.0', '186.19.128/18') );
+var_dump( ip_in_range( '186.19.192.0', '186.19.128/18') );
 // Returns false
 ```
 
