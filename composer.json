@@ -1,8 +1,8 @@
 {
-    "name": "choval/ip-to-country",
-    "description": "Find out country from an IP by querying WHOIS servers",
+    "name": "choval/whois",
+    "description": "WHOIS wrapper for PHP with Async, get the country, owner and range of an IP.",
     "type": "project",
-    "license": "Private",
+    "license": "MIT",
     "autoload": {
       "files": [
         "src/functions.php"
