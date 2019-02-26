@@ -134,7 +134,7 @@ var_dump( ip2hex('196.11.31.255') );
 // Returns c40b1fff
 
 var_dump( ip2hex('2a03:2880::') );
-// Returns 2a03:2880:0000:0000:0000:0000:0000:0000
+// Returns 2a032880000000000000000000000000
 ```
 
 ### parse\_range
