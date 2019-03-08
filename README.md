@@ -26,7 +26,7 @@ The `range` can be retrieve for an IP query and saved to a database to check bef
 ## Installation
 
 ```sh
-composer intall choval\whois
+composer install choval\whois
 ```
 
 

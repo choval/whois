@@ -180,7 +180,7 @@ final class Query {
    * Gets the country from sections
    */
   public function getCountry() {
-    return $this->parseData($this->lines, ['country']);
+    return $this->parseData($this->lines, ['country', 'registrant country']);
   }
 
 
@@ -189,7 +189,7 @@ final class Query {
    * Gets the company
    */
   public function getOwner() {
-    return $this->parseData($this->lines, ['organization', 'org-name', 'orgname', 'owner', 'descr']);
+    return $this->parseData($this->lines, ['organization', 'org-name', 'orgname', 'owner', 'descr', 'registrant organization']);
   }
 
 
