@@ -168,7 +168,7 @@ final class Query {
    * Returns the raw response
    */
   public function getRaw() {
-    return implode("\n", $this->lines);
+    return utf8_encode(implode("\n", $this->lines));
   }
   public function __toString() {
     return $this->getRaw();
