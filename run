@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+if(!isset($argv[1])) {
+  echo "Domain required\n";
+  exit(1);
+}
+
+
+chdir(__DIR__);
+require('vendor/autoload.php');
+
+use React\EventLoop\Factory as LoopFactory;
+use Choval\Whois\Query;
+use Choval\Whois\Factory;
+use Clue\React\Block;
+
+$loop = LoopFactory::create();
+$loop->run();
+
+$whois = new Factory($loop);
+$res = Block\await( $whois->query($argv[1])->run() , $loop );
+echo "QUERY: ".$res->getAddress().PHP_EOL;
+echo "COUNTRY: ".$res->getCountry().PHP_EOL;
+echo "OWNER: ".$res->getOwner().PHP_EOL;
+

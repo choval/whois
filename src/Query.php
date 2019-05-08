@@ -28,7 +28,7 @@ final class Query {
   /**
    * Constructor
    */
-  public function __construct(string $addr=null, string $server=null, integer $port=null, LoopInterface $loop=null, float $timeout=3) {
+  public function __construct(string $addr=null, string $server=null, integer $port=null, LoopInterface $loop=null, float $timeout=5) {
     $this->addr = $addr;
     $this->server = null;
     $this->port = null;
@@ -124,19 +124,18 @@ final class Query {
    */
   public function parseData($lines, array $columns, bool $reverse=false) {
     if(is_string($lines)) {
-      $lines = explode("\n", $lines);
+      $lines = preg_split('/[\r\n]/', $lines);
     }
-    $res = false;
     if($reverse) {
       $lines = array_reverse($lines);
     }
     foreach($lines as $pos=>$line) {
+      $line = trim($line);
       if(is_numeric($pos)) {
-        $line = trim($line);
         if(empty($line) || in_array($line[0],['%', '#']) ){
           continue;
         }
-        $parts = explode(': ', $line, 2);
+        $parts = explode(':', $line, 2);
         $key = strtolower(trim($parts[0]));
         $data = trim($parts[1]??'');
       } else {
@@ -144,13 +143,11 @@ final class Query {
         $data = $line;
       }
       $lowdata = strtolower($data);
-      if(!$res && in_array($key, $columns)) {
-        $res = $data;
-      } else if($lowdata == 'reallocated') {
-        $res = false;
+      if(in_array($key, $columns)) {
+        return $data;
       }
     }
-    return $res;
+    return false;
   }
 
 
@@ -180,7 +177,13 @@ final class Query {
    * Gets the country from sections
    */
   public function getCountry() {
-    return $this->parseData($this->lines, ['country', 'registrant country']);
+    $country = $this->parseData($this->lines, ['country', 'registrant country', 'domain']);
+    if(!$country) {
+      $parts = explode('.', $this->addr);
+      $end = strtoupper(end($parts));
+      return $end;
+    }
+    return strtoupper($country);
   }
 
 
@@ -189,7 +192,7 @@ final class Query {
    * Gets the company
    */
   public function getOwner() {
-    return $this->parseData($this->lines, ['organization', 'org-name', 'orgname', 'owner', 'descr', 'registrant organization']);
+    return $this->parseData($this->lines, ['organization', 'org-name', 'orgname', 'owner', 'descr', 'registrant organization', 'name', 'registrant name'], true);
   }
 
 

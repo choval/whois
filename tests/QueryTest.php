@@ -42,14 +42,14 @@ class QueryTest extends TestCase {
 
   public function ipProvider() {
     return [
-      [ '8.8.8.8', 'US', 'Google LLC (GOGL)', 'ipv4' ],
-      [ '13.77.161.179', 'US', 'Microsoft Corporation (MSFT)', 'ipv4' ],
+      [ '8.8.8.8', 'US', 'Google LLC', 'ipv4' ],
+      [ '13.77.161.179', 'US', 'Microsoft Corporation', 'ipv4' ],
       [ '31.13.85.36', 'BR', 'Facebook', 'ipv4' ],
-      [ '194.224.110.41', 'ES', 'Telefonica Soluciones', 'ipv4' ],
-      [ '124.74.250.145', 'CN', 'CHINANET Shanghai province network', 'ipv4' ],
+      [ '194.224.110.41', 'ES', 'TDENET (Red de servicios IP)', 'ipv4' ],
+      [ '124.74.250.145', 'CN', 'China Telecom', 'ipv4' ],
       [ '196.11.31.20', 'ZA', 'Bidorbuy (Pty) Ltd', 'ipv4' ],
       [ '2a03:2880:f11b:83:face:b00c:0:25', 'IE', 'Facebook Ireland Ltd', 'ipv6' ],
-      [ '2001:4860:4860::8888', 'US', 'Google LLC (GOGL)', 'ipv6' ],
+      [ '2001:4860:4860::8888', 'US', 'Google LLC', 'ipv6' ],
     ];
   }
 
