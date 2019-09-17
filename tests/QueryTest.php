@@ -44,7 +44,7 @@ class QueryTest extends TestCase {
     return [
       [ '8.8.8.8', 'US', 'Google LLC', 'ipv4' ],
       [ '13.77.161.179', 'US', 'Microsoft Corporation', 'ipv4' ],
-      [ '31.13.85.36', 'BR', 'Facebook', 'ipv4' ],
+      [ '31.13.85.36', 'IE', 'Facebook Ireland Ltd', 'ipv4' ],
       [ '194.224.110.41', 'ES', 'TDENET (Red de servicios IP)', 'ipv4' ],
       [ '124.74.250.145', 'CN', 'China Telecom', 'ipv4' ],
       [ '196.11.31.20', 'ZA', 'Bidorbuy (Pty) Ltd', 'ipv4' ],
