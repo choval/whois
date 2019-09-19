@@ -129,5 +129,11 @@ class QueryTest extends TestCase {
   }
 
 
+
+  public function testInjection() {
+    $this->expectException( \Exception::class );
+    $q = new Query('8.8.8.8 && echo INJECTION');
+    $raw = $q->run()->getRaw();
+  }
 }
 

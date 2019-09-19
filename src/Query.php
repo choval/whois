@@ -29,7 +29,17 @@ final class Query {
    * Constructor
    */
   public function __construct(string $addr=null, string $server=null, integer $port=null, LoopInterface $loop=null, float $timeout=5) {
-    $this->addr = $addr;
+    if($this->isVersion6($addr) || $this->isVersion4($addr)) {
+        $this->addr = $addr;
+    } else {
+        $forbidden_chars = [' ', '|', '&', ':', '>', '<', '/', '\\', "\n", "\r", '"', '\'', ')', '(', '[', ']', '^', '~', '?', '=', ';', '`' ];
+        foreach($forbidden_chars as $char) {
+            if(strpos($addr, $char) !== false) {
+                throw new \Exception('Non valid address');
+            }
+        }
+        $this->addr = $addr;
+    }
     $this->server = null;
     $this->port = null;
     $this->loop = $loop;
