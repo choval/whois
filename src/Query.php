@@ -3,13 +3,14 @@ namespace Choval\Whois;
 
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
-use React\ChildProcess\Process;
 
 use function Choval\Whois\is_ipv6;
 use function Choval\Whois\is_ipv4;
 use function Choval\Whois\ip_version;
 use function Choval\Whois\parse_range;
 use function Choval\Whois\ip_expand;
+
+use Choval\Async;
 
 final class Query {
 
@@ -73,25 +74,16 @@ final class Query {
       return $this;
     }
     $defer = new Deferred;
-    $proc = new Process($cmd);
-    $proc->start( $this->loop );
-    $buffer = '';
-    $proc->stdout->on('data', function($data) use (&$buffer) {
-      $buffer .= $data;
-    });
-    $proc->on('exit', function($exitCode) use ($defer, &$buffer) {
-      $lines = explode("\n", $buffer);
-      if($exitCode) {
-        $defer->reject( new \Exception('WHOIS query failed') );
-      }
-      $this->sections = $this->parseSections($lines);
-      $this->lines = $lines;
-      $defer->resolve($this);
-    });
-    $this->loop->addTimer($this->timeout, function() use ($defer, $proc) {
-      $proc->terminate();
-      $defer->reject( new \Exception('WHOIS timed out') );
-    });
+    Async\execute( $this->loop, $cmd , $this->timeout )
+        ->then(function($res) use ($defer) {
+            $lines = explode("\n", $res);
+            $this->sections = $this->parseSections($lines);
+            $this->lines = $lines;
+            $defer->resolve($this);
+        })
+        ->otherwise(function($e) use ($defer) {
+            $defer->reject($e);
+        });
     return $defer->promise();
   }
 
