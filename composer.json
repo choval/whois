@@ -4,19 +4,19 @@
     "type": "project",
     "license": "MIT",
     "autoload": {
-      "files": [
-        "src/functions.php"
-      ],
-      "psr-4": {
-        "Choval\\Whois\\": "src/"
-      }
+        "files": [
+            "src/functions.php"
+        ],
+        "psr-4": {
+            "Choval\\Whois\\": "src/"
+        }
     },
     "require": {
-        "choval/async": "^0.4.0"
+        "choval/async": "^0.5"
     },
     "require-dev": {
-      "clue/block-react": "^1.3",
-      "phpunit/phpunit": "^7"
+        "clue/block-react": "^1.3",
+        "symplify/easy-coding-standard": "^7.0",
+        "phpunit/phpunit": "^8"
     }
-
 }

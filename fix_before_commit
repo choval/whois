@@ -1,0 +1,3 @@
+#!/bin/bash
+vendor/bin/ecs check src  --fix
+vendor/bin/ecs check tests  --fix
