@@ -45,33 +45,33 @@ class QueryTest extends TestCase
     public function ipProvider()
     {
         return [
-      [ '8.8.8.8', 'US', 'Level 3 Parent, LLC', 'ipv4' ],
-      [ '13.77.161.179', 'US', 'Microsoft Corporation', 'ipv4' ],
-      [ '31.13.85.36', 'IE', 'Facebook Ireland Ltd', 'ipv4' ],
-      [ '194.224.110.41', 'ES', 'TDENET (Red de servicios IP)', 'ipv4' ],
-      [ '124.74.250.145', 'CN', 'China Telecom', 'ipv4' ],
-      [ '196.11.31.20', 'ZA', 'Bidorbuy (Pty) Ltd', 'ipv4' ],
-      [ '2a03:2880:f11b:83:face:b00c:0:25', 'IE', 'Facebook Ireland Ltd', 'ipv6' ],
-      [ '2001:4860:4860::8888', 'US', 'Google LLC', 'ipv6' ],
-    ];
+          [ '8.8.8.8', 'US', 'Level 3 Parent, LLC', 'ipv4' ],
+          [ '13.77.161.179', 'US', 'Microsoft Corporation', 'ipv4' ],
+          [ '31.13.85.36', 'IE', 'Facebook Ireland Ltd', 'ipv4' ],
+          [ '194.224.110.41', 'ES', 'TDENET (Red de servicios IP)', 'ipv4' ],
+          [ '124.74.250.145', 'CN', 'China Telecom', 'ipv4' ],
+          [ '196.11.31.20', 'ZA', 'Bidorbuy (Pty) Ltd', 'ipv4' ],
+          [ '2a03:2880:f11b:83:face:b00c:0:25', 'IE', 'Facebook Ireland Ltd', 'ipv6' ],
+          [ '2001:4860:4860::8888', 'US', 'Google LLC', 'ipv6' ],
+        ];
     }
 
 
     public function partialIpProvider()
     {
         return [
-      [ '192.168.0', '192.168.0.0', 'ipv4' ],
-      [ '2001:0db8::1428:57ab', '2001:0db8:0000:0000:0000:0000:1428:57ab', 'ipv6' ],
-    ];
+          [ '192.168.0', '192.168.0.0', 'ipv4' ],
+          [ '2001:0db8::1428:57ab', '2001:0db8:0000:0000:0000:0000:1428:57ab', 'ipv6' ],
+        ];
     }
 
 
     public function domainProvider()
     {
         return [
-      ['google.com'],
-      ['microsoft.com'],
-    ];
+          ['google.com'],
+          ['microsoft.com'],
+        ];
     }
 
 
