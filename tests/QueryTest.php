@@ -1,9 +1,9 @@
 <?php
 
 error_reporting(E_ALL);
+use Choval\Async;
 use Choval\Whois\Factory;
 use Choval\Whois\Query;
-use Clue\React\Block;
 use PHPUnit\Framework\TestCase;
 
 use React\EventLoop\Factory as LoopFactory;
@@ -22,8 +22,7 @@ class QueryTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
-        static::$loop = LoopFactory::create();
-        static::$loop->run();
+        static::$loop = Async\init();
     }
 
 
@@ -34,9 +33,9 @@ class QueryTest extends TestCase
     private function wait($promise, $timeout = 5)
     {
         if ($promise instanceof \React\Promise\PromiseInterface) {
-            return Block\await($promise, static::$loop, $timeout);
+            return Async\wait($promise, $timeout);
         } elseif (is_array($promise)) {
-            return Block\awaitAll($promise, static::$loop, $timeout);
+            return Async\wait($promise, $timeout);
         }
         return $promise;
     }
@@ -84,14 +83,28 @@ class QueryTest extends TestCase
     }
 
 
-
-    public function testInjection()
+    public function testInjectionAmper()
     {
         $this->expectException(\Exception::class);
         $q = new Query('8.8.8.8 && echo INJECTION');
         $raw = $q->run()->getRaw();
     }
 
+
+    public function testInjectionPipe()
+    {
+        $this->expectException(\Exception::class);
+        $q = new Query('8.8.8.8 | echo INJECTION');
+        $raw = $q->run()->getRaw();
+    }
+
+
+    public function testInjectionSemicolon()
+    {
+        $this->expectException(\Exception::class);
+        $q = new Query('8.8.8.8 ; echo INJECTION');
+        $raw = $q->run()->getRaw();
+    }
 
 
     /**

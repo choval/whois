@@ -31,7 +31,7 @@ final class Query
             $forbidden_chars = [' ', '|', '&', ':', '>', '<', '/', '\\', "\n", "\r", '"', '\'', ')', '(', '[', ']', '^', '~', '?', '=', ';', '`' ];
             foreach ($forbidden_chars as $char) {
                 if (strpos($addr, $char) !== false) {
-                    throw new \Exception('Non valid address');
+                    throw new \RuntimeException('Non valid address');
                 }
             }
             $this->addr = $addr;
