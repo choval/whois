@@ -182,7 +182,10 @@ final class Query
         if (!$country) {
             $parts = explode('.', $this->addr);
             $end = strtoupper(end($parts));
-            return $end;
+            if (strlen($end) == 2 && !is_numeric($end)) {
+                return $end;
+            }
+            return;
         }
         return strtoupper($country);
     }
