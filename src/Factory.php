@@ -50,4 +50,14 @@ class Factory
     {
         return $this->timeout;
     }
+
+
+    /**
+     * Sets the timeout
+     */
+    public function setTimeout(float $timeout)
+    {
+        $this->timeout = $timeout;
+        return $this;
+    }
 }
