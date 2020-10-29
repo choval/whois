@@ -23,7 +23,7 @@ final class Query
     /**
      * Constructor
      */
-    public function __construct(string $addr = null, string $server = null, integer $port = null, LoopInterface $loop = null, float $timeout = 5)
+    public function __construct(string $addr = null, string $server = null, int $port = null, LoopInterface $loop = null, float $timeout = 5)
     {
         if ($this->isVersion6($addr) || $this->isVersion4($addr)) {
             $this->addr = $addr;
@@ -72,10 +72,12 @@ final class Query
             return $this;
         }
         return Async\resolve(function () use ($cmd) {
-            $res = yield Async\execute($this->loop, $cmd, $this->timeout);
-            $lines = explode("\n", $res);
-            $this->sections = $this->parseSections($lines);
-            $this->lines = $lines;
+            $res = yield Async\silent(Async\execute($this->loop, $cmd, $this->timeout));
+            if ($res) {
+                $lines = explode("\n", $res);
+                $this->sections = $this->parseSections($lines);
+                $this->lines = $lines;
+            }
             return $this;
         });
     }
