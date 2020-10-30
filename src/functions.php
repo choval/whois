@@ -69,11 +69,21 @@ namespace Choval\Whois {
           $parts = explode(' - ', $range, 2);
           $from = ip_expand(trim($parts[0]));
           $to = ip_expand(trim($parts[1]));
-      } elseif (strpos($range, '/')) {
-          $parts = explode('/', $range, 2);
-          $addr = ip_expand($parts[0]);
-          $prefix = (int)$parts[1];
-          $v = ip_version($addr);
+      } else {
+          if (strpos($range, '/')) {
+              $parts = explode('/', $range, 2);
+              $addr = ip_expand($parts[0]);
+              $prefix = (int)$parts[1];
+              $v = ip_version($addr);
+          } else {
+              $addr = ip_expand($range);
+              $v = ip_version($addr);
+              if ($v == 'ipv4') {
+                  $prefix = 32;
+              } elseif ($v == 'ipv6') {
+                  $prefix = 128;
+              }
+          }
           if ($v == 'ipv4') {
               $start = ip2long($addr);
               $size = 1 << (32 - $prefix);
@@ -101,14 +111,14 @@ namespace Choval\Whois {
           $bin_from = inet_pton($from);
           $bin_to = inet_pton($to);
           return [
-        'range' => $range,
-        'from' => $from,
-        'to' => $to,
-        'bin_from' => $bin_from,
-        'bin_to' => $bin_to,
-        'hex_from' => bin2hex($bin_from),
-        'hex_to' => bin2hex($bin_to),
-      ];
+            'range' => $range,
+            'from' => $from,
+            'to' => $to,
+            'bin_from' => $bin_from,
+            'bin_to' => $bin_to,
+            'hex_from' => bin2hex($bin_from),
+            'hex_to' => bin2hex($bin_to),
+          ];
       }
       return false;
   }
