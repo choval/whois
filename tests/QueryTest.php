@@ -45,7 +45,7 @@ class QueryTest extends TestCase
     public function ipProvider()
     {
         return [
-          [ '8.8.8.8', 'US', 'Level 3 Parent, LLC', 'ipv4' ],
+          [ '8.8.8.8', 'US', 'Google LLC', 'ipv4' ],
           [ '13.77.161.179', 'US', 'Microsoft Corporation', 'ipv4' ],
           [ '31.13.85.36', 'IE', 'Facebook Ireland Ltd', 'ipv4' ],
           [ '194.224.110.41', 'ES', 'TDENET (Red de servicios IP)', 'ipv4' ],
